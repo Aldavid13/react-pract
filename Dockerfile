@@ -1,7 +1,7 @@
 FROM node:18.9 as build
 WORKDIR /usr/src/app
 COPY package.json .
-RUN yarn install
+RUN yarn 
 COPY . .
 RUN yarn build
 
