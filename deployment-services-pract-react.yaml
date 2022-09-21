@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prat-react-deployment
+spec:
+  selector:
+   matchLabels:
+    app: pract-react-01
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pract-react-01
+    spec:
+      containers:
+        - name: pract-react-01
+          image: 'aldavid/pract-react:tag'
+          ports:
+            - containerPort: 80
+              name: practica-01port
+          imagePullPolicy: Always
+         
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pract-react-service
+  labels:
+    app: pract-react-01
+spec:   
+  ports:
+  - name: pract-react-01
+    port: 80
+    nodePort : 32555
+  #type: LoadBalancer
+  type: NodePort
+  selector:
+   app: pract-react-01
